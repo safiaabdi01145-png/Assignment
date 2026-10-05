@@ -1,0 +1,62 @@
+package Assignments;
+import java.util.Date;
+public class Loan {
+    private double annualInterestRate ;
+    private int numberOfYears;
+    private double leonAmount;
+    private Date loanDate;
+
+    public Loan () {
+        this.annualInterestRate=2.5;
+        this.numberOfYears= 1;
+        this.leonAmount= 1000;
+        this.loanDate= new Date();
+    }
+    public Loan (double annualInterestRate, int numberOfYears, double leonAmount) {
+        this.annualInterestRate=annualInterestRate;
+        this.numberOfYears=numberOfYears;
+        this.leonAmount=leonAmount;
+        this.loanDate=new Date();
+    }
+    public double getAnnualInterestRate () {
+        return annualInterestRate;
+    }
+    public int getNumberOfYears () {
+        return numberOfYears;
+    }
+    public double getLeonAmount () {
+        return leonAmount;
+    }
+
+    public Date getLoanDate() {
+        return loanDate;
+    }
+    public void setAnnualInterestRate (double annualInterestRate) {
+        this.annualInterestRate=annualInterestRate;
+    }
+    public void setNumberOfYears (int numberOfYears) {
+        this.numberOfYears=numberOfYears;
+    }
+    public void setLeonAmount (double leonAmount) {
+        this.leonAmount= leonAmount;
+    }
+    public double getMonthlyPayment () {
+        double monthlyInterestRate = annualInterestRate / 1200;
+        double monthlyPayment = (leonAmount * monthlyInterestRate)
+                / (1- (1/ Math.pow(1 + monthlyInterestRate, numberOfYears * 12)));
+        return monthlyPayment;
+    }
+    public double getTotalPayment () {
+        double totalPayment = getMonthlyPayment() * numberOfYears * 12;
+        return totalPayment;
+    }
+}
+class testLoan {
+    public static void main(String[] args) {
+     Loan loan1 = new Loan();
+        System.out.println("The Date Is: " + loan1.getLoanDate());
+        System.out.println("The Monthly Payment " + String.format("%.2f ",loan1.getMonthlyPayment()) );
+        System.out.println("The Total Pay" + String.format("%.2f ",loan1.getTotalPayment() ));
+
+    }
+}
